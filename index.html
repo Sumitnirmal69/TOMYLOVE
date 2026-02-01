@@ -58,6 +58,14 @@
             display: none;
         }
 
+        #love {
+            margin-top: 10px;
+            font-size: 22px;
+            color: #ffe6f2;
+            font-weight: bold;
+            display: none;
+        }
+
         canvas {
             position: fixed;
             top: 0;
@@ -75,14 +83,17 @@
     <h1>Priyanka Kirar, will you be my Valentine? 💖</h1>
     <button id="yes" onclick="yesClicked()">Yes</button>
     <button id="no">No</button>
+
     <div id="message">Yayyy! 💕 I knew it 😍 Happy Valentine’s Day 💖</div>
+    <div id="love">I Love You Priyanka ❤️</div>
 </div>
 
 <script>
     const noButton = document.getElementById("no");
     const message = document.getElementById("message");
+    const loveText = document.getElementById("love");
 
-    // NO button moves ONLY when clicked
+    // No button moves ONLY when clicked
     noButton.addEventListener("click", moveNo);
 
     function moveNo() {
@@ -94,9 +105,8 @@
 
     function yesClicked() {
         message.style.display = "block";
+        loveText.style.display = "block";
         startConfetti();
-
-        // Hide the No button when Yes is clicked
         noButton.style.display = "none";
     }
 
@@ -105,6 +115,7 @@
     const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
     const pieces = [];
     const colors = ["#ff4d88", "#ffcc00", "#ffffff", "#b30059"];
 
