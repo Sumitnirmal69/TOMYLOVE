@@ -100,68 +100,7 @@
     const music = document.getElementById("bgMusic");
     const playMusicBtn = document.getElementById("playMusic");
 
-    // NO button moves ONLY when clicked
-    noButton.addEventListener("click", moveNo);
-
-    function moveNo() {
-        const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
-        const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
-        noButton.style.left = x + "px";
-        noButton.style.top = y + "px";
-    }
-
-    // Function to start music
-    function playMusic() {
-        music.volume = 0.6;
-        const playPromise = music.play();
-        if (playPromise !== undefined) {
-            playPromise.then(() => console.log("Music started 🎵"))
-                       .catch(() => alert("Please tap the page again to play music"));
-        }
-        playMusicBtn.style.display = "none"; // hide after tap
-    }
-
-    function yesClicked() {
-        message.style.display = "block";
-        startConfetti();
-
-        // Hide the No button when Yes is clicked
-        noButton.style.display = "none";
-
-        // Play music if not already playing
-        playMusic();
-    }
-
-    // 🎉 CONFETTI
-    const canvas = document.getElementById("confetti");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const pieces = [];
-    const colors = ["#ff4d88", "#ffcc00", "#ffffff", "#b30059"];
-
-    function startConfetti() {
-        for (let i = 0; i < 150; i++) {
-            pieces.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height - canvas.height,
-                size: Math.random() * 8 + 4,
-                speed: Math.random() * 3 + 2,
-                color: colors[Math.floor(Math.random() * colors.length)]
-            });
-        }
-        requestAnimationFrame(updateConfetti);
-    }
-
-    function updateConfetti() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        pieces.forEach(p => {
-            p.y += p.speed;
-            if (p.y > canvas.height) p.y = 0;
-            ctx.fillStyle = p.color;
-            ctx.fillRect(p.x, p.y, p.size, p.size);
-        });
-        requestAnimationFrame(updateConfetti);
+  
     }
 </script>
 
