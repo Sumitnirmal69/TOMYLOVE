@@ -65,9 +65,9 @@
 
 <canvas id="confetti"></canvas>
 
-<!-- 🎶 Romantic Music -->
+<!-- 🎶 Hollywood Style Romantic Music -->
 <audio id="bgMusic" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4c8a0e7b61.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/audio/2023/03/06/audio_5c9d4c5f1b.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container">
@@ -85,14 +85,25 @@
 
     function yesClicked() {
         document.getElementById("message").style.display = "block";
-        document.getElementById("bgMusic").play();
         startConfetti();
+
+        const music = document.getElementById("bgMusic");
+        music.volume = 0.6;
+
+        // Modern browsers safe play
+        const playPromise = music.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log("Music started 🎵");
+            }).catch((error) => {
+                alert("Please tap on the page to play music 😊"); // fallback
+            });
+        }
     }
 
     // 🎉 CONFETTI
     const canvas = document.getElementById("confetti");
     const ctx = canvas.getContext("2d");
-
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
