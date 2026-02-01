@@ -88,9 +88,8 @@
     const message = document.getElementById("message");
     const music = document.getElementById("bgMusic");
 
-    // Random movement of No button
-    document.addEventListener("mousemove", moveNo);
-    document.addEventListener("touchstart", moveNo);
+    // NO button moves ONLY when clicked
+    noButton.addEventListener("click", moveNo);
 
     function moveNo() {
         const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
