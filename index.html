@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Valentine Proposal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: pink;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 2;
+        }
+
+        h1 {
+            color: #b30059;
+            margin-bottom: 30px;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #yes {
+            background-color: #ff4d88;
+            color: white;
+        }
+
+        #no {
+            background-color: #666;
+            color: white;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 22px;
+            color: #b30059;
+            display: none;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<!-- 🎶 Romantic Music -->
+<audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4c8a0e7b61.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <h1>Priyanka Kirar, will you be my Valentine? 💖</h1>
+    <button id="yes" onclick="yesClicked()">Yes</button>
+    <button id="no" onclick="hideNo()">No</button>
+
+    <div id="message">Yayyy! 💕 I knew it 😍 Happy Valentine’s Day 💖</div>
+</div>
+
+<script>
+    function hideNo() {
+        document.getElementById("no").style.display = "none";
+    }
+
+    function yesClicked() {
+        document.getElementById("message").style.display = "block";
+        document.getElementById("bgMusic").play();
+        startConfetti();
+    }
+
+    // 🎉 CONFETTI
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const pieces = [];
+    const colors = ["#ff4d88", "#ffcc00", "#ffffff", "#b30059"];
+
+    function startConfetti() {
+        for (let i = 0; i < 150; i++) {
+            pieces.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                size: Math.random() * 8 + 4,
+                speed: Math.random() * 3 + 2,
+                color: colors[Math.floor(Math.random() * colors.length)]
+            });
+        }
+        requestAnimationFrame(updateConfetti);
+    }
+
+    function updateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+            p.y += p.speed;
+            if (p.y > canvas.height) p.y = 0;
+            ctx.fillStyle = p.color;
+            ctx.fillRect(p.x, p.y, p.size, p.size);
+        });
+        requestAnimationFrame(updateConfetti);
+    }
+</script>
+
+</body>
+</html>
