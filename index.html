@@ -71,7 +71,6 @@
 
 <canvas id="confetti"></canvas>
 
-<!-- Romantic Hollywood Music -->
 <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/audio/2023/03/06/audio_5c9d4c5f1b.mp3" type="audio/mpeg">
 </audio>
@@ -79,7 +78,7 @@
 <div class="container">
     <h1>Priyanka Kirar, will you be my Valentine? 💖</h1>
     <button id="yes" onclick="yesClicked()">Yes</button>
-    <button id="no" onclick="hideNo()">No</button>
+    <button id="no">No</button>
     <div id="message">Yayyy! 💕 I knew it 😍 Happy Valentine’s Day 💖</div>
 </div>
 
@@ -100,13 +99,13 @@
         noButton.style.top = y + "px";
     }
 
-    function hideNo() {
-        noButton.style.display = "none";
-    }
-
     function yesClicked() {
         message.style.display = "block";
         startConfetti();
+
+        // Hide the No button when Yes is clicked
+        noButton.style.display = "none";
+
         music.volume = 0.6;
         const playPromise = music.play();
         if (playPromise !== undefined) {
