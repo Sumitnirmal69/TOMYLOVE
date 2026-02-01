@@ -50,6 +50,11 @@
             color: white;
         }
 
+        #playMusic {
+            background-color: #ffcc00;
+            color: #b30059;
+        }
+
         #message {
             margin-top: 20px;
             font-size: 26px;
@@ -71,14 +76,20 @@
 
 <canvas id="confetti"></canvas>
 
+<!-- Music -->
 <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/audio/2023/03/06/audio_5c9d4c5f1b.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container">
     <h1>Priyanka Kirar, will you be my Valentine? 💖</h1>
+    
+    <!-- Extra Play Music button for mobile autoplay -->
+    <button id="playMusic" onclick="playMusic()">Tap to Play Music 🎵</button>
+    
     <button id="yes" onclick="yesClicked()">Yes</button>
     <button id="no">No</button>
+    
     <div id="message">Yayyy! 💕 I knew it 😍 Happy Valentine’s Day 💖</div>
 </div>
 
@@ -87,6 +98,7 @@
     const yesButton = document.getElementById("yes");
     const message = document.getElementById("message");
     const music = document.getElementById("bgMusic");
+    const playMusicBtn = document.getElementById("playMusic");
 
     // NO button moves ONLY when clicked
     noButton.addEventListener("click", moveNo);
@@ -98,6 +110,17 @@
         noButton.style.top = y + "px";
     }
 
+    // Function to start music
+    function playMusic() {
+        music.volume = 0.6;
+        const playPromise = music.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => console.log("Music started 🎵"))
+                       .catch(() => alert("Please tap the page again to play music"));
+        }
+        playMusicBtn.style.display = "none"; // hide after tap
+    }
+
     function yesClicked() {
         message.style.display = "block";
         startConfetti();
@@ -105,12 +128,8 @@
         // Hide the No button when Yes is clicked
         noButton.style.display = "none";
 
-        music.volume = 0.6;
-        const playPromise = music.play();
-        if (playPromise !== undefined) {
-            playPromise.then(() => console.log("Music started 🎵"))
-                       .catch(() => alert("Please tap on the page to play music 😊"));
-        }
+        // Play music if not already playing
+        playMusic();
     }
 
     // 🎉 CONFETTI
